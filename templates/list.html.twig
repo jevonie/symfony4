@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <body>
+    	<table>
+    		<thead>
+	    		<th>Name</th>
+	    		<th>Email</th>
+	    		<th>Gender</th>
+	    		<th>Description</th>	
+    		</thead>
+    		<tbody>  
+    				{% for user in users %}
+    					<tr>
+	        			<td>{{ user.name }}</td>
+	        			<td>{{ user.email }}</td>
+	        			<td>{{ user.gender }}</td>
+	        			<td>{{ user.description }}</td>
+	        			<td><a href='/remove?id={{ user.name }}'>Delete</a></td>
+	        			</tr> 
+	    			{% endfor %}	
+    					
+    		</tbody>
+    	</table>
+    </body>
+</html>
