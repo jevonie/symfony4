@@ -5,6 +5,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use App\Entity\Users;
 use App\Form\UserType;
+use App\Form\ListView;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -57,13 +58,26 @@ class DefaultController extends Controller
     * @Route("/lists", name="users_show")
     */
      public function showAction()
-    {
+    {   
+        $listview = new ListView();
         $repository = $this->getDoctrine()->getRepository(Users::class);
         $user = $repository->findAll();
 
         return $this->render('list.html.twig', array(
-            'users' => $user,
+            'view' => $listview->createView(),
         ));
 
+    }
+    /**
+ * @Route("/users/delete/{id}")
+ */
+public function deleteAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository(Users::class)->find($id);
+
+        $em->remove($user);
+        $em->flush();
+        return $this->redirectToRoute('/users/list');
     }
 }

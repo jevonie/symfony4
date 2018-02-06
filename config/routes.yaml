@@ -10,3 +10,6 @@ app_lucky_number:
 list:
     path: /users/list
     controller: App\Controller\DefaultController::showAction
+delete:
+    path: /users/delete/{id}
+    controller: App\Controller\DefaultController::deleteAction

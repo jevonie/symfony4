@@ -56,6 +56,11 @@ class Users
     */
     private $description;
 
+    public function getId()
+    {
+        return $this->id;
+    }
+
     public function getEmail()
     {
         return $this->email;

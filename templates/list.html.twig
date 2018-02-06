@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <body>
-    	<table>
+    	<!-- <table>
     		<thead>
 	    		<th>Name</th>
 	    		<th>Email</th>
@@ -15,11 +15,12 @@
 	        			<td>{{ user.email }}</td>
 	        			<td>{{ user.gender }}</td>
 	        			<td>{{ user.description }}</td>
-	        			<td><a href='/remove?id={{ user.name }}'>Delete</a></td>
+	        			<td><a href='/users/delete/{{ user.id }}'>Delete</a></td>
 	        			</tr> 
 	    			{% endfor %}	
     					
     		</tbody>
-    	</table>
+    	</table> -->
+    	{{ view }}
     </body>
 </html>
