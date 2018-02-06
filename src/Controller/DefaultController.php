@@ -64,7 +64,7 @@ class DefaultController extends Controller
         $user = $repository->findAll();
 
         return $this->render('list.html.twig', array(
-            'view' => $listview->createView(),
+            'users' => $user,
         ));
 
     }

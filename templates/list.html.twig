@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 <html>
+<div class="container">
     <body>
-    	<!-- <table>
+    	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+    	<link rel="stylesheet" href="{{ asset('build/css/bootstrap.min.css') }}">
+    	<link rel="stylesheet" href="{{ asset('build/app.css') }}">
+    	
+    	<table class="mytable">
     		<thead>
 	    		<th>Name</th>
 	    		<th>Email</th>
@@ -16,11 +21,23 @@
 	        			<td>{{ user.gender }}</td>
 	        			<td>{{ user.description }}</td>
 	        			<td><a href='/users/delete/{{ user.id }}'>Delete</a></td>
+	        			<td><a href='/users/edit/{{ user.id }}'>Edit</a></td>
 	        			</tr> 
 	    			{% endfor %}	
     					
     		</tbody>
-    	</table> -->
-    	{{ view }}
+    	</table>
     </body>
+    <footer>
+    	<script src="{{ asset('build/js/bootstrap.min.js') }}"></script>
+    	<script src="{{ asset('build/app.js') }}"></script>
+    	<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    	<script type="text/javascript"> 
+    		$(document).ready(function() {
+			   $('.mytable').DataTable();
+
+			});
+    	</script>
+    </footer>
+ </div>
 </html>
