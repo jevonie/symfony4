@@ -14,7 +14,21 @@ class Users
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    // private $id;
 
     // add your own fields
+     public function getId()
+    {
+        return $this->id;
+    }
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
 }

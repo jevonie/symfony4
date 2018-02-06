@@ -1,6 +1,9 @@
 index:
     path: /
     controller: App\Controller\DefaultController::index
+form:
+    path: /form
+    controller: App\Controller\DefaultController::buildForm
 app_lucky_number:
     path: /lucky/number
     controller: App\Controller\Lucky::number
