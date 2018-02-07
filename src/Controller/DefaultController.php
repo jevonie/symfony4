@@ -68,7 +68,7 @@ class DefaultController extends Controller
         ));
 
     }
-    /**
+ /**
  * @Route("/users/delete/{id}")
  */
 public function deleteAction($id)
@@ -80,4 +80,26 @@ public function deleteAction($id)
         $em->flush();
         return $this->redirectToRoute('/users/list');
     }
+/**
+ * @Route("/users/edit/{id}")
+ */
+public function editAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository(Users::class)->find($id);
+
+        if (!$user) {
+            throw $this->createNotFoundException(
+                'No product found for id '.$id
+            );
+        }
+
+        $em->persist($user);
+        $em->flush();
+
+        return $this->redirectToRoute('/users/list', [
+            'id' => $user->getId()
+        ]);
+    }
 }
+
