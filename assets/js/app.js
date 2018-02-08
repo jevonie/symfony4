@@ -21,10 +21,12 @@ $(document).ready(function() {
     	$('#myTable').on( 'click', 'tbody tr td', function () {
     		var dat = $('#active').val();
     		if(!dat){
-    		   dat = myTable.cell(this).data();
-    		   old = dat;
-    		  myTable.cell(this).data('<input type="text" id="active" value="'+dat+'"/>')
-    		  $("#active").focus();
+    			 dat = myTable.cell(this).data();
+    		 	if(dat != myTable.row(this).data()[5]){
+    		 		old = dat;
+    		  		myTable.cell(this).data('<input type="text" id="active" value="'+dat+'"/>')
+    		  		$("#active").focus();
+    		 	}
     		}
 		});
 		$('#myTable').on('mouseleave', 'tbody tr td', function () {
@@ -32,17 +34,17 @@ $(document).ready(function() {
 			if(dats){
 				myTable.cell(this).data(dats);
 				 var row_data = myTable.row(this).data();
-				console.log(myTable.row(this).data());
 				if(old != dats){
+					var afields = new Array();
+						var dat = {'name': row_data[1],'email':row_data[2],'gender':row_data[3],'description':row_data[4]}
 					$.ajax({
 						url:'/users/edit/'+row_data[0],
 		                type: "POST",
-		                data: row_data,
-		                async: true,
+		                data: dat,
 		                success: function (data)
 		                {
-		                    console.log(data)
-		                    $('div#ajax-results').html(data.output);
+		                    // console.log(data)
+		                    // $('div#ajax-results').html(data.output);
 
 		                }
 					})

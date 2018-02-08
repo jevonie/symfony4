@@ -78,28 +78,25 @@ public function deleteAction($id)
 
         $em->remove($user);
         $em->flush();
-        return $this->redirectToRoute('/users/list');
+        return $this->redirectToRoute('list');
     }
 /**
  * @Route("/users/edit/{id}")
  */
-public function editAction($id)
+public function editAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository(Users::class)->find($id);
 
-        if (!$user) {
-            throw $this->createNotFoundException(
-                'No product found for id '.$id
-            );
-        }
-
+        $form = $this->createForm(UserType::class, $user);
+        $user->setName($request->request->get('name'));
+        $user->setEmail($request->request->get('email'));
+        $user->setGender($request->request->get('gender'));
+        $user->setDescription($request->request->get('description'));
         $em->persist($user);
         $em->flush();
 
-        return $this->redirectToRoute('/users/list', [
-            'id' => $user->getId()
-        ]);
+        return $this->redirectToRoute('list');
     }
 }
 

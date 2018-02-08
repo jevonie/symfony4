@@ -13,3 +13,6 @@ list:
 delete:
     path: /users/delete/{id}
     controller: App\Controller\DefaultController::deleteAction
+edit:
+    path: /users/edit/{id}
+    controller: App\Controller\DefaultController::editAction
