@@ -15,7 +15,10 @@ require('bootstrap-sass');
 var myTable,old;
 
 $(document).ready(function() {
-
+		$('.nav-link').click(function(){
+				$('.nav-link').removeClass('active');
+				$(this).addClass('active');
+		})	 
        	myTable = $("#myTable").DataTable();
        	myTable.column( 0 ).visible( false );
     	$('#myTable').on( 'click', 'tbody tr td', function () {

@@ -1,13 +1,29 @@
 <!DOCTYPE html>
 <html>
+<link rel="stylesheet" href="{{ asset('build/app.css') }}">
+ 
+<div class="container">
     <body>
-    {{ form_start(form) }}
-    {{ form_row(form.name) }}
-    {{ form_row(form.email) }}
-    {{ form_row(form.plainPassword.first) }}
-    {{ form_row(form.plainPassword.second) }}
-
-  
-	{{ form_end(form) }}
+    	<div class="header">
+    	<ul class="nav nav-tabs">
+		  <li class="nav-item">
+		    <a class="nav-link" href="/">Home</a>
+		  </li>
+		  <li class="nav-item">
+		    <a class="nav-link active" href="/form">Form</a>
+		  </li>
+		  <li class="nav-item">
+		    <a class="nav-link" href="/users/list">List</a>
+		  </li>
+		</ul>
+    	</div>
+	    {{ form_start(form) }}
+	    {{ form_row(form.name) }}
+	    {{ form_row(form.email) }}
+	    {{ form_row(form.plainPassword.first) }}
+	    {{ form_row(form.plainPassword.second) }}
+	  
+		{{ form_end(form) }}
     </body>
+    <script src="{{ asset('build/app.js') }}"></script>
 </html>
