@@ -11,9 +11,10 @@ Encore
     // .enableVersioning(Encore.isProduction())
 
     // uncomment to define the assets of the project
+    // .addStyleEntry('datatable_style', './assets/DataTables/datatables.min.css')
     .addEntry('app', './assets/js/app.js')
-    // .addStyleEntry('css/app', './assets/css/app.scss')
-
+    
+    
     // uncomment if you use Sass/SCSS files
     .enableSassLoader(function(sassOptions) {}, {
          resolveUrlLoader: false
@@ -29,5 +30,4 @@ Encore
     // .enableVersioning()
 
 ;
-
 module.exports = Encore.getWebpackConfig();

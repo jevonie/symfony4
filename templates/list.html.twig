@@ -1,65 +1,46 @@
 <!DOCTYPE html>
 <html>
-
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<link rel="stylesheet" type="text/css" href="{{ asset('build/DataTables/datatables.min.css') }}">
-<script type="text/javascript" charset="utf8" src="{{ asset('build/DataTables/datatables.min.js') }}"></script>
-<script src="https://cdn.datatables.net/select/1.2.5/js/dataTables.select.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-
-<script type="text/javascript">
-	var myTable,old;
-	$(document).ready(function(){
-   		myTable = $("#myTable").DataTable();
-    	$('#myTable').on( 'click', 'tbody tr td', function () {
-    		var dat = $('.active').val();
-    		if(!dat){
-    		   myTable.cell(this).data(dat);
-    		   dat = myTable.cell(this).data();
-    		   old = dat;
-    		   myTable.cell(this).data('<input type="text" class="active" value="'+dat+'"/>')
-    		}
-    		
-		});
-		$('#myTable').on( 'mouseleave', 'tbody tr td', function () {
-			var dat = $('.active').val();
-			myTable.cell(this).data(dat);
-			if(dat){
-				if(old != dat){
-					console.log('nge');
-				}
-			}
-			
-		});
-	});
-</script>
+<link rel="stylesheet" href="{{ asset('build/app.css') }}">
+ 
 <div class="container">
     <body>
-    	
-    	<link rel="stylesheet" href="{{ asset('build/css/bootstrap.min.css') }}">
-    	<!-- <link rel="stylesheet" href="{{ asset('build/dataTables.editor.min.js') }}"> -->
-    	
+    	<div class="header">
+    		
+    	</div>
+    	<ul class="nav nav-tabs">
+		  <li class="nav-item">
+		    <a class="nav-link active" href="#">Active</a>
+		  </li>
+		  <li class="nav-item">
+		    <a class="nav-link" href="#">Link</a>
+		  </li>
+		  <li class="nav-item">
+		    <a class="nav-link" href="#">Link</a>
+		  </li>
+		  <li class="nav-item">
+		    <a class="nav-link disabled" href="#">Disabled</a>
+		  </li>
+		</ul>
     	<table id="myTable" class="table">
     		<thead>
     			<tr>
+    			<th></th>	
 	    		<th>Name</th>
 	    		<th>Email</th>
 	    		<th>Gender</th>
 	    		<th>Description</th>
 	    		<th></th>
-	    		<th></th>	
 	    	</tr>
     		</thead>
     		<tbody>  
     				{% for user in users %}
     					<tr>
+    					<td>{{ user.id }}</td>
 	        			<td>{{ user.name }}</td>
 	        			<td>{{ user.email }}</td>
 	        			<td>{{ user.gender }}</td>
 	        			<td>{{ user.description }}</td>
 	        			<td><a href='/users/delete/{{ user.id }}'>Delete</a></td>
-	        			<td><a href='/users/edit/{{ user.id }}'>save</a></td>
 	        			</tr> 
 	    			{% endfor %}	
     					
@@ -67,12 +48,7 @@
     	</table>
     </body>
     <footer>
-    	
-
-    	
-    	<script src="{{ asset('build/js/dataTables.editor.min.js') }}"></script>
-    	<!-- <script src="{{ asset('build/app.js') }}"></script> -->
-
+	<script src="{{ asset('build/app.js') }}"></script>
     </footer>
  </div>
 </html>
