@@ -25,7 +25,7 @@ class UserType extends AbstractType
             ))
             ->add('gender', TextType::class)
             ->add('description', TextType::class)
-            ->add('save', SubmitType::class, array('label' => 'Save'))
+            // ->add('save', SubmitType::class, array('label' => 'Save'))
             ->getForm();
     }
 

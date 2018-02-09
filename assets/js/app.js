@@ -15,10 +15,59 @@ require('bootstrap-sass');
 var myTable,old;
 
 $(document).ready(function() {
-		$('.nav-link').click(function(){
+		$('.nav-link').click(function(e){
 				$('.nav-link').removeClass('active');
 				$(this).addClass('active');
+				
 		})	 
+		$('.nav-link').popover(function(e){
+				$('#myModal').modal('show');
+		})	
+		$('#list').click(function(e){
+				e.preventDefault();
+				$.ajax({
+						url:'/users/list',
+		                type: "POST",
+		                data: {},
+		                success: function (data)
+		                {
+		                    $('#myModal').modal('show');
+		                }
+				})
+				
+		})	
+		$('#form').click(function(e){
+			console.log('nfge');
+				e.preventDefault();
+				$.ajax({
+						url:'/form',
+		                type: "POST",
+		                data: {},
+		                success: function (data)
+		                {
+		                    $('#myModal').modal('show');
+		                }
+				})
+		})	
+		$('#index').click(function(e){
+
+				e.preventDefault();
+				$.ajax({
+						url:'/',
+		                type: "POST",
+		                data: {},
+		                success: function (data)
+		                {
+		                    $('#myModal').modal('show');
+		                }
+				})
+		})
+		$(".nav-item").mouseover(function() {
+			var link = $(this).attr("href");
+			 
+			 console.log('nge');
+
+       	});
        	myTable = $("#myTable").DataTable();
        	myTable.column( 0 ).visible( false );
     	$('#myTable').on( 'click', 'tbody tr td', function () {

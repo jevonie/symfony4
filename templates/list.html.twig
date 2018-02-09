@@ -1,23 +1,21 @@
 <!DOCTYPE html>
 <html>
 <link rel="stylesheet" href="{{ asset('build/app.css') }}">
- 
 <div class="container">
     <body>
     	<div class="header">
     		<ul class="nav nav-tabs">
 			  <li class="nav-item">
-			    <a class="nav-link" href="/">Home</a>
+			    <a class="nav-link" href="/">Homes <span class="badge" id="index"><span class="glyphicon glyphicon-new-window"></span></a>
 			  </li>
 			  <li class="nav-item">
-			    <a class="nav-link" href="/form">Form</a>
+			    <a class="nav-link" href="/form">Form <span class="badge" id="form"><span class="glyphicon glyphicon-new-window"></a>
 			  </li>
-			  <li class="nav-item">
-			    <a class="nav-link active" href="/users/list">List</a>
+			  <li class="nav-item active">
+			    <a class="nav-link" href="/users/list">List</a>
 			  </li>
 			</ul>
-	    	</div>
-   		
+	    </div>
     	<table id="myTable" class="table">
     		<thead>
     			<tr>
@@ -48,4 +46,5 @@
 	<script src="{{ asset('build/app.js') }}"></script>
     </footer>
  </div>
+ {% include "nav.html.twig"%}
 </html>
