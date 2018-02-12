@@ -30,7 +30,13 @@ $(document).ready(function() {
 		                type: "POST",
 		                data: {},
 		                success: function (data)
-		                {
+		                {	
+
+		                	var $result = $(data).find('.mycontent');
+		                	var response = $('.modal-body').html($result);
+		                	// var temp = response.find('.mycontent');
+							
+							// console.log(temp.html);
 		                    $('#myModal').modal('show');
 		                }
 				})
@@ -45,6 +51,11 @@ $(document).ready(function() {
 		                data: {},
 		                success: function (data)
 		                {
+		                    var $result = $(data).find('.mycontent');
+		                	var response = $('.modal-body').html($result);
+		                	// var temp = response.find('.mycontent');
+							
+							// console.log(temp.html);
 		                    $('#myModal').modal('show');
 		                }
 				})
@@ -58,6 +69,11 @@ $(document).ready(function() {
 		                data: {},
 		                success: function (data)
 		                {
+		                    var $result = $(data).find('.mycontent');
+		                	var response = $('.modal-body').html($result);
+		                	// var temp = response.find('.mycontent');
+							
+							// console.log(temp.html);
 		                    $('#myModal').modal('show');
 		                }
 				})

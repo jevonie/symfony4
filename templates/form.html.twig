@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
 <link rel="stylesheet" href="{{ asset('build/app.css') }}">
+<script src="{{ asset('build/app.js') }}"></script>
 <!-- Enable bootstrap 4 theme -->
 <script>window.__theme = 'bs4';</script>
-<div class="container">
+<div class="container-fluid">
     <body>
     	<div class="header">
     	<ul class="nav nav-tabs">
@@ -18,9 +19,10 @@
 		  </li>
 		</ul>
     	</div>
-
-	<a href="/form">go to form</a>
+    <div class="mycontent">
+		<a href="/form">go to form</a>
+	</div>
 		</body>
-		 <script src="{{ asset('build/app.js') }}"></script>
+		 
     {% include "nav.html.twig"%}
 </html>
