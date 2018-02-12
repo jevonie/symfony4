@@ -17,11 +17,7 @@ class DefaultController extends Controller
      */
     public function index()
     {
-        $number = mt_rand(0, 100);
-
-        return $this->render('form.html.twig', array(
-            'number' => $number,
-        ));
+       return $this->render('home.html.twig');
     }
      /**
      * @Route("/form", name="user_registration")
@@ -35,7 +31,6 @@ class DefaultController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             // $form->getData() holds the submitted values
             // but, the original `$task` variable has also been updated
-
             $password =  $user->getPlainPassword();
             $user->setPassword($password);
 
@@ -45,11 +40,11 @@ class DefaultController extends Controller
             $em->persist($user);
             $em->flush();
 
-            return $this->redirectToRoute('index');
+            return $this->redirectToRoute('form');
         }
 
 
-        return $this->render('new.html.twig', array(
+        return $this->render('newForm.html.twig', array(
             'form' => $form->createView(),
         ));
     }

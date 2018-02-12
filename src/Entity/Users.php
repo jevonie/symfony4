@@ -8,6 +8,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UsersRepository")
+ * @UniqueEntity(fields="email", message="Email already taken")
+ * @UniqueEntity(fields="name", message="Username already taken")
  */
 class Users
 {
@@ -18,15 +20,19 @@ class Users
      */
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=100)
+     /**
+     * @ORM\Column(type="string", length=255, unique=true)
+     * @Assert\NotBlank()
      */
     private $name;
 
      /**
-     * @ORM\Column(type="string", length=255, unique=true)
+     * @ORM\Column(name="email", type="string", length=255, unique=true)
      * @Assert\NotBlank()
-     * @Assert\Email()
+     * @Assert\Email(
+     *     message = "The email '{{ value }}' is not a valid email.",
+     *     checkMX = true
+     * )
      */
     private $email;
 

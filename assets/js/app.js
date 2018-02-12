@@ -84,7 +84,10 @@ $(document).ready(function() {
 			 console.log('nge');
 
        	});
-       	myTable = $("#myTable").DataTable();
+       	myTable = $("#myTable").DataTable({ 
+       		"scrollY": "200px",
+        	"scrollCollapse": true,
+    	});
        	myTable.column( 0 ).visible( false );
     	$('#myTable').on( 'click', 'tbody tr td', function () {
     		var dat = $('#active').val();
