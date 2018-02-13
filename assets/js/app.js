@@ -12,39 +12,82 @@ require('bootstrap-sass');
 // or you can include specific pieces
 // require('bootstrap-sass/javascripts/bootstrap/tooltip');
 // require('bootstrap-sass/javascripts/bootstrap/popover');
-var myTable,old;
+var myTable,old,myTableModal;
 
 $(document).ready(function() {
-		$('.nav-link').click(function(e){
-				$('.nav-link').removeClass('active');
-				$(this).addClass('active');
-				
-		})	 
-		$('.nav-link').popover(function(e){
-				$('#myModal').modal('show');
-		})	
+		myTable = $("#myTable").DataTable({ 
+       		"scrollX": true,
+        	"scrollCollapse": true,
+    	});
+    	myTableModal = $("#myTableModal").DataTable({ 
+       		"scrollX": true,
+        	"scrollCollapse": true,
+    	});
 		$('#list').click(function(e){
-				e.preventDefault();
+				e.stopPropagation();
+				myTableModal.clear();
 				$.ajax({
-						url:'/users/list',
+						url:'/json/list',
 		                type: "POST",
 		                data: {},
 		                success: function (data)
-		                {	
-
-		                	var $result = $(data).find('.mycontent');
-		                	var response = $('.modal-body').html($result);
-		                	// var temp = response.find('.mycontent');
-							
-							// console.log(temp.html);
+		                {	      	
+		                	$.each(data, function (key ,val) {
+						        myTableModal.row.add( [
+						        	val['id'],
+						            val['name'],
+						            val['email'],
+						            val['gender'],
+						            val['description'],
+						            "<a href='#' data-id='"+val['id']+"' class='delete'>Delete</a>"
+						        ] ).draw( false );
+						    });
+						    $('.static-content').hide();
+						    $('.form-button').hide();
+						    $('.table-content').show();
 		                    $('#myModal').modal('show');
 		                }
 				})
 				
 		})	
+		
 		$('#form').click(function(e){
-			console.log('nfge');
+				e.stopPropagation();
+				$.ajax({
+						url:'/form',
+		                type: "POST",
+		                data: {},
+		                success: function (data)
+		                {	
+		                	var $result = $(data).find('.mycontent');
+		                	var response = $('.static-content').html($result);
+		                	$('.static-content').show();
+		                	$('.form-button').show();
+		                	$('.table-content').hide();
+		                    $('#myModal').modal('show');
+		                }
+				})
+		})	
+		$('#index').click(function(e){
+				e.stopPropagation();
+                // var $result = $('#index-tab').find('#index-tab');
+            	var response = $('.static-content').html($('#index-tab').html());
+            	$('.static-content').show();
+            	$('.form-button').hide();
+            	$('.table-content').hide();
+                $('#myModal').modal('show');
+		          
+		})
+		$('.nav-item').click(function() {
+			$(".nav-item").removeClass("active");
+			$(this).addClass('active');
+		})
+		// $('#index').hide();
+		$('#main-form').click(function(e){
 				e.preventDefault();
+				$('#index').show();
+				$('#list').show();
+				$('#form').hide();
 				$.ajax({
 						url:'/form',
 		                type: "POST",
@@ -52,17 +95,15 @@ $(document).ready(function() {
 		                success: function (data)
 		                {
 		                    var $result = $(data).find('.mycontent');
-		                	var response = $('.modal-body').html($result);
-		                	// var temp = response.find('.mycontent');
-							
-							// console.log(temp.html);
-		                    $('#myModal').modal('show');
+		                	var response = $('#form-content').html($result);
 		                }
 				})
 		})	
-		$('#index').click(function(e){
-
+		$('#main-index').click(function(e){
 				e.preventDefault();
+				$('#form').show();
+				$('#list').show();
+				$('#index').hide();
 				$.ajax({
 						url:'/',
 		                type: "POST",
@@ -70,24 +111,37 @@ $(document).ready(function() {
 		                success: function (data)
 		                {
 		                    var $result = $(data).find('.mycontent');
-		                	var response = $('.modal-body').html($result);
-		                	// var temp = response.find('.mycontent');
-							
-							// console.log(temp.html);
-		                    $('#myModal').modal('show');
+		                	var response = $('#index-content').html($result);
 		                }
 				})
-		})
-		$(".nav-item").mouseover(function() {
-			var link = $(this).attr("href");
-			 
-			 console.log('nge');
-
-       	});
-       	myTable = $("#myTable").DataTable({ 
-       		"scrollY": "200px",
-        	"scrollCollapse": true,
-    	});
+		})	
+		$('#main-list').click(function(e){
+				e.preventDefault();
+				$('#form').show();
+				$('#index').show();
+				$('#list').hide();
+				$('.js-controller').remove();
+				myTable.clear();
+				$.ajax({
+						url:'/json/list',
+		                type: "POST",
+		                data: {},
+		                success: function (data)
+		                {	
+		                	$.each(data, function (key ,val) {
+						        myTable.row.add( [
+						        	val['id'],
+						            val['name'],
+						            val['email'],
+						            val['gender'],
+						            val['description'],
+						            "<a href='#' data-id='"+val['id']+"' class='delete'>Delete</a>"
+						        ] ).draw( false );
+						    });
+		                }
+				})
+		})	
+       
        	myTable.column( 0 ).visible( false );
     	$('#myTable').on( 'click', 'tbody tr td', function () {
     		var dat = $('#active').val();
@@ -96,6 +150,18 @@ $(document).ready(function() {
     		 	if(dat != myTable.row(this).data()[5]){
     		 		old = dat;
     		  		myTable.cell(this).data('<input type="text" id="active" value="'+dat+'"/>')
+    		  		$("#active").focus();
+    		 	}
+    		}
+		});
+		myTableModal.column( 0 ).visible( false );
+		$('#myTableModal').on( 'click', 'tbody tr td', function () {
+    		var dat = $('#active').val();
+    		if(!dat){
+    			 dat = myTableModal.cell(this).data();
+    		 	if(dat != myTableModal.row(this).data()[5]){
+    		 		old = dat;
+    		  		myTableModal.cell(this).data('<input type="text" id="active" value="'+dat+'"/>')
     		  		$("#active").focus();
     		 	}
     		}
@@ -126,4 +192,101 @@ $(document).ready(function() {
 			
 			
 		});
+		$('#myTableModal').on('mouseleave', 'tbody tr td', function () {
+			var dats = $("#active").val();
+			if(dats){
+				myTableModal.cell(this).data(dats);
+				 var row_data = myTableModal.row(this).data();
+				if(old != dats){
+					var afields = new Array();
+						var dat = {'name': row_data[1],'email':row_data[2],'gender':row_data[3],'description':row_data[4]}
+					$.ajax({
+						url:'/users/edit/'+row_data[0],
+		                type: "POST",
+		                data: dat,
+		                success: function (data)
+		                {
+		                    // console.log(data)
+		                    // $('div#ajax-results').html(data.output);
+
+		                }
+					})
+				}
+			}else{
+
+			}
+			
+			
+		});
+		$('#form_submit').click(function(e){
+				e.preventDefault();
+				e.stopPropagation();
+				console.log('aw');
+				$.ajax({
+						url:'/form',
+		                type: "POST",
+		                data: $('.form').serializeArray(),
+		                success: function (data)
+		                {	
+		                	var $result = $(data).find('.mycontent');
+		                	var response = $('#form-content').html($result);
+		                }
+				})
+		})	
+
+		$('#form_submit_modal').click(function(e){
+				e.preventDefault();
+				e.stopPropagation();
+				console.log('aw');
+				$.ajax({
+						url:'/form',
+		                type: "POST",
+		                data: $('.static-content > .mycontent > .form').serializeArray(),
+		                success: function (data)
+		                {	
+		                	var $result = $(data).find('.mycontent');
+		                	var response = $('.static-content').html($result);
+		                }
+				})
+		})	
+		$('.goto-list').click(function(e){
+				e.preventDefault();
+				e.stopPropagation();
+				$('#myModal').modal('hide');
+				$('#main-list').click();
+		});
+		$('.goto-form').click(function(e){
+				e.preventDefault();
+				e.stopPropagation();
+				$('#main-form').click();
+		});
+		$('.static-content').on('click','.goto-form',function(e){
+				$('#myModal').modal('hide');
+				$('#main-form').click();
+		});
+		 $('#myTable tbody').on( 'click', 'a', function () {
+        	$.ajax({
+				url:'/users/delete/'+ $(this).attr('data-id'),
+                type: "POST",
+                data: {},
+                success: function (data)
+                {
+                   $('#main-list').click();
+                }
+			});
+    	} );
+    	$('#myTableModal tbody').on( 'click', 'a', function () {
+        	$.ajax({
+				url:'/users/delete/'+ $(this).attr('data-id'),
+                type: "POST",
+                data: {},
+                success: function (data)
+                {
+                   $('#myModal').modal('hide');
+                   $('#main-list').click();
+                }
+			});
+    	} );		
+		
+
 });

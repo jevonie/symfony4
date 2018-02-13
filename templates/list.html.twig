@@ -1,21 +1,8 @@
 <!DOCTYPE html>
 <html>
-<link rel="stylesheet" href="{{ asset('build/app.css') }}">
 <div class="container-fluid">
+	<!-- <link rel="stylesheet" href="{{ asset('build/app.css') }}"> -->
     <body>
-    	<div class="header">
-    		<ul class="nav nav-tabs">
-			  <li class="nav-item">
-			    <a class="nav-link" href="/">Homes <span class="badge" id="index"><span class="glyphicon glyphicon-new-window"></span></a>
-			  </li>
-			  <li class="nav-item">
-			    <a class="nav-link" href="/form">Form <span class="badge" id="form"><span class="glyphicon glyphicon-new-window"></a>
-			  </li>
-			  <li class="nav-item active">
-			    <a class="nav-link" href="/users/list">List</a>
-			  </li>
-			</ul>
-	    </div>
 	    <div class="mycontent">
     	<table id="myTable" class="table">
     		<thead>
@@ -42,12 +29,11 @@
     					
     		</tbody>
     	</table>
-    	<script src="{{ asset('build/app.js') }}"></script>
     	</div>
     </body>
     <footer>
-	
+       <!--  <script src="{{ asset('build/app.js') }}"></script> -->
     </footer>
  </div>
- {% include "nav.html.twig"%}
+
 </html>

@@ -9,6 +9,7 @@ use App\Form\ListView;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class DefaultController extends Controller
 {   
@@ -16,8 +17,8 @@ class DefaultController extends Controller
      * @Route("/", name="home_page")
      */
     public function index()
-    {
-       return $this->render('home.html.twig');
+    {   
+        return $this->render('home.html.twig');
     }
      /**
      * @Route("/form", name="user_registration")
@@ -62,6 +63,29 @@ class DefaultController extends Controller
             'users' => $user,
         ));
 
+    }
+        /**
+    * @Route("/json/list", name="users_show")
+    */
+     public function jsonAction(Request $request)
+    {   
+        $response = new JsonResponse();
+        $repository = $this->getDoctrine()
+                ->getRepository(Users::class)
+                ->findAll();
+        $jsonData = array();  
+        $idx = 0;  
+      foreach($repository as $user) {  
+         $temp = array(
+            'id' => $user->getId(),
+            'name' => $user->getName(),  
+            'email' => $user->getEmail(),
+            'gender' => $user->getGender(), 
+            'description' => $user->getDescription(),   
+         );   
+         $jsonData[$idx++] = $temp;  
+      } 
+      return new JsonResponse($jsonData);  
     }
  /**
  * @Route("/users/delete/{id}")

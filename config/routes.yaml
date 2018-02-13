@@ -16,3 +16,6 @@ delete:
 edit:
     path: /users/edit/{id}
     controller: App\Controller\DefaultController::editAction
+json:
+    path: /json/list
+    controller: App\Controller\DefaultController::jsonAction

@@ -8,10 +8,29 @@
         </button>
       </div>
       <div class="modal-body">
-       
+        <div class="static-content"></div>
+        <div class="table-content" style="display: none;">
+           <table id="myTableModal" class="table" width="100%">
+            <thead>
+              <tr>
+              <th></th> 
+              <th>Name</th>
+              <th>Email</th>
+              <th>Gender</th>
+              <th>Description</th>
+              <th></th>
+            </tr>
+            </thead>
+            <tbody>   
+            </tbody>
+          </table>
+        </div>
       </div>
       <div class="modal-footer">
+          <a href="#" class="form-button goto-list">go to list <span class="glyphicon glyphicon-new-window"></a>
+          <button id="form_submit_modal" style class="btn btn-primary form-button form_submit">Submit</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        
         <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
       </div>
     </div>

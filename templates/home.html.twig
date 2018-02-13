@@ -1,28 +1,53 @@
 <!DOCTYPE html>
 <html>
 <link rel="stylesheet" href="{{ asset('build/app.css') }}">
-<script src="{{ asset('build/app.js') }}"></script>
-<!-- Enable bootstrap 4 theme -->
-<script>window.__theme = 'bs4';</script>
 <div class="container-fluid">
     <body>
     	<div class="header">
-    	<ul class="nav nav-tabs">
-		  <li class="nav-item active">
-		    <a class="nav-link" href="/">Home</a>
-		  </li>
-		  <li class="nav-item">
-		    <a class="nav-link" href="/form">Form <span class="badge" id="form"><span class="glyphicon glyphicon-new-window"></span></span></a>
-		  </li>
-		  <li class="nav-item">
-		    <a class="nav-link" href="/users/list">List <span class="badge" id="list"><span class="glyphicon glyphicon-new-window"></span></span></a>
-		  </li>
-		</ul>
+		 <ul class="nav nav-tabs">
+		    <li class="active"><a data-toggle="tab" id="main-index" href="#home">Home <span class="badge" style="display: none;" id="index"><span class="glyphicon glyphicon-new-window"></span></span></a></li>
+		    <li><a data-toggle="tab" id="main-form" href="#form-tab">Form <span class="badge" id="form"><span class="glyphicon glyphicon-new-window"></span></span></a></li>
+		    <li><a data-toggle="tab" id="main-list" href="#user-tab">List <span class="badge" id="list"><span class="glyphicon glyphicon-new-window"></span></span></a></li>
+		  </ul>
     	</div>
-    <div class="mycontent">
-		<a href="/form">go to form</a>
-	</div>
-		</body>
-		 
+    
+		  <div class="tab-content">
+		    <div id="home" class="tab-pane fade in active">
+		      <h3>HOME</h3><div id='index-tab'><a href="#" class="goto-form">go to form</a></div>
+		    </div>
+		    <div id="form-tab" class="tab-pane fade">
+		      <h3>Registration Form</h3>
+		      <div id='form-content'>
+		      	
+		      </div>
+		      <button id="form_submit" style class="btn btn-primary">Submit</button>
+		      <a href="#" class="goto-list">go to list <span class="glyphicon glyphicon-new-window"></a>
+		    </div>
+		    <div id="user-tab" class="tab-pane fade">
+		      <h3>Users Lists</h3>
+		      <div id="mycontent">
+			    <table id="myTable" class="table" width="100%">
+		    		<thead>
+		    			<tr>
+		    			<th></th>	
+			    		<th>Name</th>
+			    		<th>Email</th>
+			    		<th>Gender</th>
+			    		<th>Description</th>
+			    		<th></th>
+			    	</tr>
+		    		</thead>
+		    		<tbody>  	
+		    		</tbody>
+		    	</table>
+		      </div>
+		    </div>
+		  </div>
+	</body>
+</div>
+<footer>
+		
+</footer>
     {% include "nav.html.twig"%}
+    <script src="{{ asset('build/app.js') }}"></script>
 </html>
