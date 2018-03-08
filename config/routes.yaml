@@ -19,3 +19,4 @@ edit:
 json:
     path: /json/list
     controller: App\Controller\DefaultController::jsonAction
+
